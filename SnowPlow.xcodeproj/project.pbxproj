@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0475E3A71BEAC752000406C3 /* MBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475E3A61BEAC752000406C3 /* MBAnnotation.swift */; };
 		0489EA161BEA9C9900F9A9B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA151BEA9C9900F9A9B0 /* AppDelegate.swift */; };
 		0489EA181BEA9C9900F9A9B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA171BEA9C9900F9A9B0 /* ViewController.swift */; };
 		0489EA1B1BEA9C9900F9A9B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0489EA191BEA9C9900F9A9B0 /* Main.storyboard */; };
@@ -14,6 +15,7 @@
 		0489EA201BEA9C9900F9A9B0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0489EA1E1BEA9C9900F9A9B0 /* LaunchScreen.storyboard */; };
 		0489EA2B1BEA9C9900F9A9B0 /* SnowPlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA2A1BEA9C9900F9A9B0 /* SnowPlowTests.swift */; };
 		0489EA361BEA9C9900F9A9B0 /* SnowPlowUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA351BEA9C9900F9A9B0 /* SnowPlowUITests.swift */; };
+		0489EA441BEAA62C00F9A9B0 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA431BEAA62C00F9A9B0 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0475E3A61BEAC752000406C3 /* MBAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBAnnotation.swift; sourceTree = "<group>"; };
 		0489EA121BEA9C9900F9A9B0 /* SnowPlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowPlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0489EA151BEA9C9900F9A9B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0489EA171BEA9C9900F9A9B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		0489EA311BEA9C9900F9A9B0 /* SnowPlowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnowPlowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0489EA351BEA9C9900F9A9B0 /* SnowPlowUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnowPlowUITests.swift; sourceTree = "<group>"; };
 		0489EA371BEA9C9900F9A9B0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0489EA431BEAA62C00F9A9B0 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +103,12 @@
 			children = (
 				0489EA151BEA9C9900F9A9B0 /* AppDelegate.swift */,
 				0489EA171BEA9C9900F9A9B0 /* ViewController.swift */,
+				0489EA431BEAA62C00F9A9B0 /* MainViewController.swift */,
 				0489EA191BEA9C9900F9A9B0 /* Main.storyboard */,
 				0489EA1C1BEA9C9900F9A9B0 /* Assets.xcassets */,
 				0489EA1E1BEA9C9900F9A9B0 /* LaunchScreen.storyboard */,
 				0489EA211BEA9C9900F9A9B0 /* Info.plist */,
+				0475E3A61BEAC752000406C3 /* MBAnnotation.swift */,
 			);
 			path = SnowPlow;
 			sourceTree = "<group>";
@@ -256,8 +262,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0489EA441BEAA62C00F9A9B0 /* MainViewController.swift in Sources */,
 				0489EA181BEA9C9900F9A9B0 /* ViewController.swift in Sources */,
 				0489EA161BEA9C9900F9A9B0 /* AppDelegate.swift in Sources */,
+				0475E3A71BEAC752000406C3 /* MBAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +490,7 @@
 				0489EA3C1BEA9C9900F9A9B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0489EA3D1BEA9C9900F9A9B0 /* Build configuration list for PBXNativeTarget "SnowPlowTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +499,7 @@
 				0489EA3F1BEA9C9900F9A9B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0489EA401BEA9C9900F9A9B0 /* Build configuration list for PBXNativeTarget "SnowPlowUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +508,7 @@
 				0489EA421BEA9C9900F9A9B0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
