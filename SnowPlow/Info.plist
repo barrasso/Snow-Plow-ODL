@@ -38,5 +38,10 @@
 	</array>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>SnowPlow requires access to your phone’s location to notify you about stuff.</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

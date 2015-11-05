@@ -18,13 +18,18 @@ class ViewController: UIViewController {
     
     @IBAction func loginButtonTouchUpInside(sender: AnyObject) {
         
-        
+        if usernameTextField.text == "plow001" || usernameTextField.text == "plow002" {
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: "isPlow")
+        } else {
+            NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isPlow")
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        NSUserDefaults.standardUserDefaults().setBool(false, forKey: "isPlow")
     }
 
     override func didReceiveMemoryWarning() {

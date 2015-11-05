@@ -15,14 +15,33 @@ class MainViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     /* CLLocation Manager */
     let locationManager = CLLocationManager()
     
+    /* Plow Location Timer */
+    var plowTimer = NSTimer?()
+    
     /* Annotations */
-    let annotationTitles = [
+    let plowAnnotationTitles = [
         "Plow 001",
         "Plow 002"]
     
-    let annotationCoordinates = [
-        CLLocationCoordinate2DMake(40.349774, -74.653205), // Plow 001 on Charlton St
-        CLLocationCoordinate2DMake(40.350437, -74.651837)] // Plow 002 on Olden St
+    let plowAnnotationCoordinates = [
+        CLLocationCoordinate2DMake(40.349798, -74.655044), // Plow 001 on William St
+        CLLocationCoordinate2DMake(40.348995, -74.650696)] // Plow 002 on Prospect Ave
+    
+    let snowAnnotationTitles = [
+        "Washington Rd",
+        "Olden St",
+        "New street"]
+    
+    let snowAnnotationSubtitles = [
+        "Light Snow - 0.5 m",
+        "Heavy Snow - 1.2 m",
+        "Mild Snow - 0.75 m"]
+    
+    let snowAnnotationCoordinates = [
+        CLLocationCoordinate2DMake(40.347029, -74.654447), // Snow 001
+        CLLocationCoordinate2DMake(40.350437, -74.651837), // Snow 002
+        CLLocationCoordinate2DMake(40.357033, -74.664458)] // Snow 003
+    
 
     /* Map View */
     var didLoadMapView = false
@@ -40,14 +59,67 @@ class MainViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     
         // setup map
         self.plowMapView.delegate = self
-        self.addAnnotationsToMapView()
         
-        
-        
+        // check if user is plow
+        let checkPlow = NSUserDefaults.standardUserDefaults().boolForKey("isPlow")
+        if checkPlow {
+            // start updating location
+            plowTimer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "updatePlowLocation", userInfo: nil, repeats: true)
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    // MARK: Plow Functions
+    
+    func updatePlowLocation() {
+        let urlString = "http://172.20.10.2:8282/InCSE1/TestAE/TestContainer/Plow001/LocGPS"
+
+        
+        // url request properties
+        let request = NSMutableURLRequest(URL: NSURL(string: urlString)!)
+        let session = NSURLSession.sharedSession()
+        request.HTTPMethod = "POST"
+        request.addValue("application/vnd.onem2m-res+json;ty=4", forHTTPHeaderField: "Content-Type")
+        request.addValue("//localhost:10000", forHTTPHeaderField: "X-M2M-Origin")
+        request.addValue("12345", forHTTPHeaderField: "X-M2M-RI")
+        
+        // append user location
+        let lat = self.plowMapView.userLocation.coordinate.latitude
+        let long = self.plowMapView.userLocation.coordinate.longitude
+        let coords = String(format: "%f,%f", lat,long)
+        
+        // JSON payload
+        let params: [NSString : AnyObject] =
+        [
+            "m2m:cin": [
+                "con":coords
+                ]
+        ]
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(params, options: NSJSONWritingOptions.PrettyPrinted)
+        } catch {
+            print("did not serialize post")
+        }
+        
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            print("Response: \(response)")
+            
+            do {
+                // serialize nsdata to json dict structure
+                let jsonDict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions.MutableContainers) as! NSDictionary
+                print("Data: \(jsonDict)")
+                
+            } catch {
+                print("errrrrooorrr")
+            }
+        })
+        
+        task.resume()
+        
     }
     
     // MARK: LOCATION MANAGER DELEGATE
@@ -64,9 +136,16 @@ class MainViewController: UIViewController, MKMapViewDelegate, CLLocationManager
         plowMapView.setRegion(region, animated: true)
     }
     
-    func addAnnotationsToMapView() {
-        for (var i = 0; i < self.annotationTitles.count; i++) {
-            let newAnnotation = MBAnnotation(coordinate: self.annotationCoordinates[i], title: self.annotationTitles[i])
+    func addPlowAnnotationsToMapView() {
+        for (var i = 0; i < self.plowAnnotationTitles.count; i++) {
+            let newAnnotation = MBAnnotation(coordinate: self.plowAnnotationCoordinates[i], title: self.plowAnnotationTitles[i])
+            plowMapView.addAnnotation(newAnnotation)
+        }
+    }
+    
+    func addSnowAnnotationsToMapView() {
+        for (var i = 0; i < self.snowAnnotationTitles.count; i++) {
+            let newAnnotation = MBSnowAnnotation(coordinate: self.snowAnnotationCoordinates[i], title: self.snowAnnotationTitles[i], subtitle: self.snowAnnotationSubtitles[i])
             plowMapView.addAnnotation(newAnnotation)
         }
     }
@@ -81,6 +160,10 @@ class MainViewController: UIViewController, MKMapViewDelegate, CLLocationManager
             
             // get weather data by location
             getWeatherDataUsingCurrentLocation()
+            
+            // add annotations to map
+            self.addPlowAnnotationsToMapView()
+            self.addSnowAnnotationsToMapView()
             
             didLoadMapView = true
         }
@@ -101,8 +184,40 @@ class MainViewController: UIViewController, MKMapViewDelegate, CLLocationManager
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
-        let customReuseID = "marker"
-        let anView = mapView.dequeueReusableAnnotationViewWithIdentifier(customReuseID)
+        
+        if annotation is MKUserLocation {
+            return nil
+            
+        } else if (annotation is MBSnowAnnotation) { /* Customize Snow Location Annotation */
+
+            let reuseID = "snow"
+            var snowView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseID)
+            
+            if snowView == nil {
+                snowView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
+                snowView!.canShowCallout = true
+                snowView!.image = UIImage(named: "snow-marker-icon.png")
+            } else {
+                snowView!.annotation = annotation
+            }
+            return snowView
+        }
+        
+        /* Customize MBAnnotations */
+        let customReuseID = "plow"
+        var anView = mapView.dequeueReusableAnnotationViewWithIdentifier(customReuseID)
+        
+        if anView == nil {
+            anView = MKAnnotationView(annotation: annotation, reuseIdentifier: customReuseID)
+            anView!.canShowCallout = true
+            anView!.rightCalloutAccessoryView = UIButton(type: .InfoDark)
+            anView!.rightCalloutAccessoryView!.tintColor = UIColor.blackColor()
+            
+        } else {
+            anView!.annotation = annotation
+        }
+        
+        anView!.image = UIImage(named: "plow-icon.png")
         
         return anView
     }

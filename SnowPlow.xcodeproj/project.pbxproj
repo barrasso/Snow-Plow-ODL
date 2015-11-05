@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0475E3A71BEAC752000406C3 /* MBAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475E3A61BEAC752000406C3 /* MBAnnotation.swift */; };
+		0475E3AA1BEBB773000406C3 /* plow-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0475E3A91BEBB773000406C3 /* plow-icon.png */; };
+		0475E3AC1BEBB9FF000406C3 /* MBSnowAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0475E3AB1BEBB9FF000406C3 /* MBSnowAnnotation.swift */; };
+		0475E3AE1BEBBB2B000406C3 /* snow-marker-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0475E3AD1BEBBB2B000406C3 /* snow-marker-icon.png */; };
 		0489EA161BEA9C9900F9A9B0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA151BEA9C9900F9A9B0 /* AppDelegate.swift */; };
 		0489EA181BEA9C9900F9A9B0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0489EA171BEA9C9900F9A9B0 /* ViewController.swift */; };
 		0489EA1B1BEA9C9900F9A9B0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0489EA191BEA9C9900F9A9B0 /* Main.storyboard */; };
@@ -37,6 +40,9 @@
 
 /* Begin PBXFileReference section */
 		0475E3A61BEAC752000406C3 /* MBAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBAnnotation.swift; sourceTree = "<group>"; };
+		0475E3A91BEBB773000406C3 /* plow-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plow-icon.png"; sourceTree = "<group>"; };
+		0475E3AB1BEBB9FF000406C3 /* MBSnowAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MBSnowAnnotation.swift; sourceTree = "<group>"; };
+		0475E3AD1BEBBB2B000406C3 /* snow-marker-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "snow-marker-icon.png"; sourceTree = "<group>"; };
 		0489EA121BEA9C9900F9A9B0 /* SnowPlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnowPlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0489EA151BEA9C9900F9A9B0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0489EA171BEA9C9900F9A9B0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +84,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0475E3A81BEBB742000406C3 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0475E3A91BEBB773000406C3 /* plow-icon.png */,
+				0475E3AD1BEBBB2B000406C3 /* snow-marker-icon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		0489EA091BEA9C9900F9A9B0 = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +124,8 @@
 				0489EA1E1BEA9C9900F9A9B0 /* LaunchScreen.storyboard */,
 				0489EA211BEA9C9900F9A9B0 /* Info.plist */,
 				0475E3A61BEAC752000406C3 /* MBAnnotation.swift */,
+				0475E3AB1BEBB9FF000406C3 /* MBSnowAnnotation.swift */,
+				0475E3A81BEBB742000406C3 /* Images */,
 			);
 			path = SnowPlow;
 			sourceTree = "<group>";
@@ -235,7 +252,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0475E3AA1BEBB773000406C3 /* plow-icon.png in Resources */,
 				0489EA201BEA9C9900F9A9B0 /* LaunchScreen.storyboard in Resources */,
+				0475E3AE1BEBBB2B000406C3 /* snow-marker-icon.png in Resources */,
 				0489EA1D1BEA9C9900F9A9B0 /* Assets.xcassets in Resources */,
 				0489EA1B1BEA9C9900F9A9B0 /* Main.storyboard in Resources */,
 			);
@@ -263,6 +282,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0489EA441BEAA62C00F9A9B0 /* MainViewController.swift in Sources */,
+				0475E3AC1BEBB9FF000406C3 /* MBSnowAnnotation.swift in Sources */,
 				0489EA181BEA9C9900F9A9B0 /* ViewController.swift in Sources */,
 				0489EA161BEA9C9900F9A9B0 /* AppDelegate.swift in Sources */,
 				0475E3A71BEAC752000406C3 /* MBAnnotation.swift in Sources */,
